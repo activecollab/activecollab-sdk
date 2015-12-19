@@ -1,6 +1,6 @@
 # activeCollab SDK
 
-This is a simple PHP library that makes communication with [activeCollab API](https://www.activecollab.com/help/books/api/index.html) easy. 
+This is a simple PHP library that makes communication with [activeCollab 4 API](https://www.activecollab.com/help/books/api/index.html) easy. **If you are looking for a library that works with Active Collab 5 and newer, use [this package](https://github.com/activecollab/activecollab-feather-sdk) instead**.
 
 ## First Connection
 

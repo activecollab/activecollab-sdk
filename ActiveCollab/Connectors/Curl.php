@@ -41,9 +41,14 @@
 
         $counter = 1;
 
-        foreach($files as $file) {
-          $post_data['attachment_' . $counter++] = '@' . $file . ';type=application/octet-stream';
-        } // foreach
+        // Support for "File" API endpoint. This endpoint is expecting a single attachment on the request...
+        if( count( $files ) == 1 ){
+            $post_data['attachment'] = '@' . $files['attachment_1'] . ';type=application/octet-stream';
+        } else {
+          foreach($files as $file) {
+            $post_data['attachment_' . $counter++] = '@' . $file . ';type=application/octet-stream';
+          } // foreach
+        } // if
       } // if
 
       curl_setopt($http, CURLOPT_POST, 1);
@@ -103,6 +108,8 @@
           case 503:
           if(is_string($result) && substr($result, 0, 1) === '{') {
             throw new AppException($status, $result); // Known application exception
+          } else {
+            throw new AppException($status); // API not always returns JSON body
           } // if
         } // switch
 
